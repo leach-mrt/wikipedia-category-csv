@@ -30,6 +30,7 @@ CMD /usr/bin/mysqld_safe --skip-grant-tables & \
   mysql -u root wikipedia < jawiki-latest-category.sql && \
   mysql -u root wikipedia < jawiki-latest-categorylinks.sql && \
   mysql -u root wikipedia < jawiki-latest-page.sql && \
-  python3 main.py
+  python3 main.py && \
+  echo "done!"
 
 VOLUME ["/opt/"]
