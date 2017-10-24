@@ -77,7 +77,7 @@ def main():
     # 1. init writer
     writer = CsvSaver()
     writer.set_header(('cat_id', 'cat_title', 'parent_cat_id'))
-    writer.set_filepath('/tmp/categories.csv')
+    writer.set_filepath('/opt/categories.csv')
     writer.init()
 
     # 1. fetch root category

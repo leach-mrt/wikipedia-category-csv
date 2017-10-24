@@ -22,14 +22,14 @@ RUN wget https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-page.sql.gz
 RUN gunzip jawiki-latest-page.sql.gz
 
 RUN ls -lat
-RUN /bin/bash -c "/usr/bin/mysqld_safe --skip-grant-tables &" && \
+
+RUN mkdir -p /opt/
+CMD /usr/bin/mysqld_safe --skip-grant-tables & \
   sleep 5 && \
   mysql -u root -e "CREATE DATABASE wikipedia" && \
   mysql -u root wikipedia < jawiki-latest-category.sql && \
   mysql -u root wikipedia < jawiki-latest-categorylinks.sql && \
-  mysql -u root wikipedia < jawiki-latest-page.sql
-ENTRYPOINT /usr/bin/mysqld_safe --skip-grant-tables && \
-  sleep 5 && \
+  mysql -u root wikipedia < jawiki-latest-page.sql && \
   python3 main.py
 
-VOLUME ["/tmp/"]
+VOLUME ["/opt/"]
