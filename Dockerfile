@@ -24,9 +24,11 @@ RUN gunzip jawiki-latest-page.sql.gz
 RUN ls -lat
 
 RUN mkdir -p /opt/
-CMD /usr/bin/mysqld_safe --skip-grant-tables & \
+ENV LANG C.UTF-8
+
+CMD /bin/bash /usr/bin/mysqld_safe --skip-grant-tables & \
   sleep 5 && \
-  mysql -u root -e "CREATE DATABASE wikipedia" && \
+  mysql -u root -e "CREATE DATABASE wikipedia default character set utf8" && \
   mysql -u root wikipedia < jawiki-latest-category.sql && \
   mysql -u root wikipedia < jawiki-latest-categorylinks.sql && \
   mysql -u root wikipedia < jawiki-latest-page.sql && \
